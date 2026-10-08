@@ -6,3 +6,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 
 ## Projects
 - `arduino-led-blink/` — Basic digital output: blinking the built-in LED using `pinMode`/`digitalWrite`/`delay`.
+- `arduino-button-input/` — Digital input: reading a push button with `digitalRead` and `INPUT_PULLUP` to control an LED.
