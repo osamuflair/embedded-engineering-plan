@@ -17,13 +17,13 @@ The potentiometer is a voltage divider. The two outer pins sit across 5V and GND
 
 `analogRead` converts that voltage into a number from 0 to 1023 (the Uno's 10-bit ADC). `analogWrite` takes a number from 0 to 255. The loop scales one range onto the other:
 
-`led_value = reading * 255 / 1023`
+`led_value = reading * MAX_BRIGHTNESS / ANALOG_READ_MAX;`
 
 The scaled value goes to `analogWrite` on pin 3, so the PWM duty cycle follows the knob.
 
 ## Code notes
 
-- **Pin A1** is read with `analogRead`. The pin does not need a `pinMode` call.
+- **Pin A1** is read with `analogRead`. pinMode is not strictly required for analogRead, but is kept to make the pin’s role clear.
 - **Overflow trap.** On the Uno an `int` is 16 bits, so it holds at most 32,767. `1023 * 255` is 260,865, so doing the multiplication in `int` overflows. Converting one operand to `long` first makes the multiplication happen in 32 bits.
 - **Where the cast goes.** The cast has to be applied to an operand, before the multiplication. `long(a * b)` converts an answer that has already overflowed.
 - **Local variables.** The values are declared inside `loop()` because they are only needed there.
