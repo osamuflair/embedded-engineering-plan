@@ -15,7 +15,7 @@ Two things at the same time on one Arduino, without `delay()`: an LED that blink
 ## How it works
 1. `previous_time` remembers when LED A last changed.
 2. On every pass, `current_time - previous_time` is compared with `BLINK_INTERVAL_MS`.
-3. When the interval has passed, the LED state is written to the pin, flipped, and `previous_time` is updated.
+3. When the interval has passed, the LED state is flipped, written to the pin, and `previous_time` is updated.
 4. The button is read on every pass, independent of the blink timing.
 
 Using subtraction (`current_time - previous_time`) keeps the comparison correct even when `millis()` wraps around after about 49 days, because the variables are `unsigned long`.
@@ -27,7 +27,7 @@ Using subtraction (`current_time - previous_time`) keeps the comparison correct 
 | LED B | 13 | with a series resistor (150 Ω) |
 | Button | 2 | other side to GND, uses `INPUT_PULLUP` |
 
-Board: ___ (simulated in Wokwi with PlatformIO in VS Code)
+Board: Arduino Uno (simulated in Wokwi with PlatformIO in VS Code)
 
 ## Result
 - **With `delay()`** (blink with `delay(1000)` twice per loop): LED B took a very long time to come on after pressing the button. The board only read the button once per 2-second loop.
