@@ -7,6 +7,6 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 ## Projects
 - `arduino-led-blink/` — Basic digital output: blinking the built-in LED using `pinMode`/`digitalWrite`/`delay`.
 - `arduino-button-input/` — Digital input: reading a push button with `digitalRead` and `INPUT_PULLUP` to control an LED.
-- `arduino-pwm-fade/` — Analog output: smoothly fades an LED on pin 3 from off to full brightness and back over and over with `analogWrite` using PWM 
+- `arduino-pwm-fade/` — Analog output: fades an LED on pin 3 up and down using PWM with `analogWrite`.
 - `arduino-pot-brightness/` — Analog input: reading a potentiometer with `analogRead` and mapping its 0–1023 range onto PWM `analogWrite` to control LED brightness.
 - `arduino-millis-blink/` — Non-blocking timing: blinks one LED with `millis()` instead of `delay()`, while a button controls a second LED with no lag.
