@@ -10,3 +10,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-pwm-fade/` — Analog output: fades an LED on pin 3 up and down using PWM with `analogWrite`.
 - `arduino-pot-brightness/` — Analog input: reading a potentiometer with `analogRead` and mapping its 0–1023 range onto PWM `analogWrite` to control LED brightness.
 - `arduino-millis-blink/` — Non-blocking timing: blinks one LED with `millis()` instead of `delay()`, while a button controls a second LED with no lag.
+- `arduino-multi-blink/` — Independent non-blocking timers: blinks three LEDs at different rates at the same time using `millis()`, with no `delay()`.
