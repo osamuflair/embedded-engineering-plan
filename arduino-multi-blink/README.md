@@ -9,17 +9,17 @@ Three LEDs blinking at three different rates at the same time on one Arduino, wi
 - Each LED runs on its own timer, so none of them waits for another.
 
 ## How it works
-The data for the LEDs lives in four arrays. The same index means the same LED in every array:
-1. `LED_PIN[]` holds each LED's pin.
-2. `BLINK_INTERVAL_MS[]` holds how often each LED toggles.
-3. `previous_time[]` remembers when each LED last toggled.
-4. `led_state[]` holds each LED's current state.
+Each LED is described by one `Led` struct that keeps all of its data together:
+1. `pin`: which pin the LED is on.
+2. `interval_ms`: how often it toggles.
+3. `previous_time`: when it last toggled.
+4. `state`: whether it is currently on or off.
 
-`LED_NUMBER` holds the number of LEDs in one place, and every loop uses it.
+All the LEDs live in one array, `LEDS[]`. The number of LEDs is computed automatically with `sizeof(LEDS) / sizeof(LEDS[0])`, so there is no count to keep up to date by hand.
 
-On every pass through `loop()`, the code reads `millis()` once. A `for` loop then visits each LED and asks: has `current_time - previous_time[i]` reached `BLINK_INTERVAL_MS[i]`? If yes, it toggles that LED and updates its `previous_time[i]`.
+On every pass through `loop()`, the code reads `millis()` once. A `for` loop then visits each LED, using a reference (`Led &led`) to the current one, and asks: has `current_time - led.previous_time` reached `led.interval_ms`? If yes, it toggles that LED and updates its `previous_time`.
 
-To add another LED, add one value to each array and change `LED_NUMBER`. The loop does not change.
+To add another LED, add one line to `LEDS[]`. Nothing else changes.
 
 ## Wiring
 | Part | Pin | Notes |
@@ -39,7 +39,9 @@ All three LEDs blink at their own speeds at the same time, drifting in and out o
 - Use `>=`, not `==`, when checking whether an interval has passed. With `==` the check can be missed if a pass through `loop()` skips the exact millisecond, and then the LED would never toggle again.
 - An LED only lights in one direction: pin → resistor → anode, and cathode → GND. My first wiring had it backwards and none of the LEDs lit.
 - An array plus a `for` loop replaces repeated code. My first version copied the same block three times, and the array version does the same job with one block.
-- Name the count once (`LED_NUMBER`) and use it everywhere, so changing it never means hunting through the code.
+- A struct keeps one LED's data together. With separate arrays, a value in the wrong slot gives no error and the LEDs just misbehave.
+- `sizeof(array) / sizeof(array[0])` gives the number of items, so adding an LED doesn't mean updating a count.
+- A reference (`Led &led = LEDS[i]`) names the current item once instead of repeating `LEDS[i]`.
 
 ## Next
-The four arrays only work if their indexes stay lined up, and nothing warns me if they don't. Next I will group each LED's pin, interval, previous time and state into a struct, so one LED's data lives together.
+Button debouncing: a mechanical button can register one press as many, so I need to filter out the noise without using `delay()`.
