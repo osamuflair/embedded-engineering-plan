@@ -1,24 +1,35 @@
 #include <Arduino.h>
 
-const int LED_NUMBER = 3;
-const int LED_PIN[LED_NUMBER] = {12, 7, 4};
-const unsigned long BLINK_INTERVAL_MS[LED_NUMBER] = {200, 500, 1000};
-unsigned long previous_time[LED_NUMBER] = {0, 0, 0};
-bool led_state[LED_NUMBER] = {false, false, false};
+struct Led
+{
+  const int pin;
+  const unsigned long interval_ms;
+  unsigned long previous_time;
+  bool state;
+};
+
+Led LEDS[] = {
+  {12, 200, 0, false},
+  {7, 500, 0, false},
+  {4, 1000, 0, false}
+};
+
+const int LED_NUMBER = sizeof(LEDS) / sizeof(LEDS[0]);
 
 void setup() {
   for (int i = 0; i < LED_NUMBER; i++){
-    pinMode(LED_PIN[i], OUTPUT);
+    pinMode(LEDS[i].pin, OUTPUT);
   }
 }
 
 void loop() {
   unsigned long current_time = millis();
   for (int i = 0; i < LED_NUMBER; i++){
-    if (current_time - previous_time[i] >= BLINK_INTERVAL_MS[i]){
-      led_state[i] = !led_state[i];
-      digitalWrite(LED_PIN[i], led_state[i]);
-      previous_time[i] = current_time;
+    Led &led = LEDS[i];
+    if (current_time - led.previous_time >= led.interval_ms){
+      led.state = !led.state;
+      digitalWrite(led.pin, led.state);
+      led.previous_time = current_time;
     }
   }
 }
