@@ -12,3 +12,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-millis-blink/` — Non-blocking timing: blinks one LED with `millis()` instead of `delay()`, while a button controls a second LED with no lag.
 - `arduino-multi-blink/` — Independent non-blocking timers: blinks three LEDs at different rates at the same time using `millis()`, with the LED data grouped in an array of structs.
 - `arduino-button-debounce/` — Input filtering: toggles an LED with a push button and removes contact bounce using `millis()`, so one press flips it exactly once.
+- `arduino-state-machine/` — State machines: one button cycles an LED through off, on, slow blink and fast blink, using an `enum` and a `switch` with `millis()` timing.
