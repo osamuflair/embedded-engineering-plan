@@ -14,3 +14,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-button-debounce/` — Input filtering: toggles an LED with a push button and removes contact bounce using `millis()`, so one press flips it exactly once.
 - `arduino-state-machine/` — State machines: one button cycles an LED through off, on, slow blink and fast blink, using an `enum` and a `switch` with `millis()` timing.
 - `arduino-serial-control/` — Serial and UART: controls the LED state machine by typing single characters in the Serial monitor as well as with the button, using `Serial.available()` and `Serial.read()`.
+- `arduino-serial-commands/` — UART text commands: sets the LED mode by typing whole words (`off`, `on`, `slow`, `fast`) into the Serial monitor, using a `char` buffer and `strcmp`, with the button still working.
