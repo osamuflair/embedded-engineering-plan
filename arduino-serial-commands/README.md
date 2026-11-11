@@ -25,7 +25,7 @@ Words are not case-sensitive, so `slow`, `Slow` and `SLOW` all work. Any other w
 Both inputs write the same `mode` variable, so the button always continues from wherever the last input left it.
 
 ### Buffer safety
-The buffer holds `MAX_ARRAY_LENGTH` (6) characters, which leaves room for the `\0`. Extra characters beyond the limit are ignored. Because the buffer is bigger than the longest command (4 letters), a too-long word like `slowly` is stored as `SLOWL`, which can never match a real command, so it is reported as invalid instead of running by accident. If a longer command is ever added, the buffer must be enlarged first.
+The buffer holds `COMMAND_BUFFER_SIZE` (6) characters, which leaves room for the `\0`. Extra characters beyond the limit are ignored. Because the buffer is bigger than the longest command (4 letters), a too-long word like `slowly` is stored as `SLOWL`, which can never match a real command, so it is reported as invalid instead of running by accident. If a longer command is ever added, the buffer must be enlarged first.
 
 ## Wiring
 | Part | Pin | Notes |
