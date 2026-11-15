@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "Osamudiamen Benedict",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 67.8, "left": -19.8, "attrs": {} },
+    {
+      "type": "wokwi-ds1307",
+      "id": "rtc1",
+      "top": -72.6,
+      "left": 115.3,
+      "rotate": 270,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "rtc1:SDA", "uno:A4", "green", [ "v39.1", "h112", "v240", "h-38.4" ] ],
+    [ "rtc1:SCL", "uno:A5", "green", [ "v19.9", "h140.9", "v0", "h0", "v249.6", "h-67.2" ] ],
+    [ "rtc1:5V", "uno:5V", "red", [ "v39.1", "h-214.5", "v249.6", "h9.6" ] ],
+    [ "rtc1:GND", "uno:GND.1", "black", [ "v19.9", "h-41.3" ] ]
+  ],
+  "dependencies": {}
+}
