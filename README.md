@@ -16,3 +16,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-serial-control/` — Serial and UART: controls the LED state machine by typing single characters in the Serial monitor as well as with the button, using `Serial.available()` and `Serial.read()`.
 - `arduino-serial-commands/` — UART text commands: sets the LED mode by typing whole words (`off`, `on`, `slow`, `fast`) into the Serial monitor, using a `char` buffer and `strcmp`, with the button still working.
 - `arduino-i2c-scan/` — I²C: scans the bus with the `Wire` library and prints the address of every device that answers, using a DS1307 clock as the target.
+- `arduino-i2c-rtc-read/` — I²C registers: reads the seconds from a DS1307 real-time clock using only `Wire`, and decodes its BCD format with bit masking and shifting.
