@@ -17,3 +17,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-serial-commands/` — UART text commands: sets the LED mode by typing whole words (`off`, `on`, `slow`, `fast`) into the Serial monitor, using a `char` buffer and `strcmp`, with the button still working.
 - `arduino-i2c-scan/` — I²C: scans the bus with the `Wire` library and prints the address of every device that answers, using a DS1307 clock as the target.
 - `arduino-i2c-rtc-read/` — I²C registers: reads the time (`HH:MM:SS`) from a DS1307 real-time clock using only `Wire`, decoding its BCD format with bit masking and shifting.
+- `arduino-i2c-lcd-clock/` — Several I²C devices on one bus: shows the time from a DS1307 clock on a 16×2 LCD, with flicker-free error messages driven by a display state.
