@@ -1,18 +1,17 @@
 #include <Arduino.h>
+#include <LiquidCrystal_I2C.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const int LCD_ADDRESS = 0x27;
+const int LCD_COLUMNS = 16;
+const int LCD_ROWS = 2;
+
+LiquidCrystal_I2C lcd(LCD_ADDRESS, LCD_COLUMNS, LCD_ROWS);
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  lcd.init();
+  lcd.backlight();
+  lcd.print("Hello World");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
 }
