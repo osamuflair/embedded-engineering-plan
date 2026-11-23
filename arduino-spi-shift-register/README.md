@@ -10,7 +10,7 @@ An 8-bit binary counter on 8 LEDs. The Arduino sends one byte over SPI to a 74HC
 SPI uses fixed pins on the Uno: MOSI on 11 and SCK on 13. The chip has no address, because it is the only device on the bus, so there is no chip-select line to call it. The latch pin is my own choice (pin 2).
 
 1. **Send the byte.** `write_leds()` begins an SPI transaction, pulls the latch low, sends the byte with `SPI.transfer()`, pulls the latch high, then ends the transaction.
-2. **Shift, then latch.** The 74HC595 has two stages. The 8 bits are clocked into a shift register one by one. The latch pulse (STCP) then copies all 8 bits to the outputs at once. [FILL IN: what would you see on the LEDs without the latch?]
+2. **Shift, then latch.** The 74HC595 has two stages. The 8 bits are clocked into a shift register one by one. The latch pulse (STCP) then copies all 8 bits to the outputs at once. Without the latch, the outputs would change while the bits are still shifting in, so the LEDs would flicker through half-shifted patterns instead of showing one clean number.
 3. **Time the counting.** `loop()` checks `millis()` and, every 300 ms, sends the counter and adds 1. The counter is a `byte`, so it wraps from 255 to 0 without any extra code.
 
 ## Wiring
@@ -27,7 +27,7 @@ SPI uses fixed pins on the Uno: MOSI on 11 and SCK on 13. The chip has no addres
 Board: Arduino Uno (simulated in Wokwi with PlatformIO in VS Code). SPI is built in, so `lib_deps` isn't needed.
 
 ## Result
-The LEDs count up in binary. At count 5 the lit LEDs are [FILL IN: which ones], so bit 0 is [FILL IN: led1 or led8].
+The LEDs count up in binary. At count 5 the lit LEDs are led1 and led3, so bit 0 is led1.
 
 ## What I learned
 - On the Uno the SPI data and clock pins are fixed by hardware (11 and 13). My first wiring had them on the wrong pins, so nothing would have lit.
