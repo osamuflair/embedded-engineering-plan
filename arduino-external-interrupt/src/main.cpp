@@ -1,18 +1,27 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const byte LED_PIN = 6;
+const byte INTERRUPT_PIN = 2;
+volatile byte state = LOW;
+unsigned long previous_time = 0;
+unsigned long debounce_time = 50;
+
+void toggle_led();
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(INTERRUPT_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), toggle_led, FALLING);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  digitalWrite(LED_PIN, state);
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void toggle_led() {
+  unsigned long current_time = millis();
+  if (current_time - previous_time >= debounce_time) {
+    state = !state;
+    previous_time = current_time;
+  } 
 }
