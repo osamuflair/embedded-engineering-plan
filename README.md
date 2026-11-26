@@ -19,3 +19,4 @@ Each folder is a standalone project, simulated using [Wokwi](https://wokwi.com) 
 - `arduino-i2c-rtc-read/` — I²C registers: reads the time (`HH:MM:SS`) from a DS1307 real-time clock using only `Wire`, decoding its BCD format with bit masking and shifting.
 - `arduino-i2c-lcd-clock/` — Several I²C devices on one bus: shows the time from a DS1307 clock on a 16×2 LCD, with flicker-free error messages driven by a display state.
 - `arduino-spi-shift-register/` — SPI with a 74HC595 shift register: a binary counter on 8 LEDs, sent as one byte with a latch.
+- `arduino-external-interrupt/` — Interrupts: a button on an interrupt pin toggles an LED through an ISR with a debounce, and counters show one tap firing the interrupt 146 times.
